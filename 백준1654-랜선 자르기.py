@@ -1,3 +1,5 @@
+
+
 k, n = map(int, input().split())
 cables = [int(input()) for _ in range(k)]
 
