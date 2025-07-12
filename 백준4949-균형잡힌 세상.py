@@ -1,30 +1,27 @@
-# 1. 입력의 종료 조건 : .(온점)
-
 while True:
-    input_str = input()
+    str_input = input()
     stack = []
 
-    if input_str =='.':
+    if str_input == '.':  
         break
 
-    for str in input_str:
-        if str == '(' or str == '[':
-            stack.append(str)
-
-        elif str == ')':
-            if len(stack) != 0 and stack[-1] == '(':
+    for s in str_input:
+        if (s == "[") or (s == "("):
+            stack.append(s)
+        elif s == ")":
+            if len(stack)!=0 and stack[-1] == "(":
                 stack.pop()
             else:
-                stack.append(str)
+                stack.append(s)
                 break
-        elif str == ']':
-            if len(stack) != 0 and stack[-1] == '[':
+        elif s == "]":
+            if len(stack)!=0 and stack[-1] == "[":
                 stack.pop()
             else:
-                stack.append(str)
+                stack.append(s)
                 break
-            
+    
     if len(stack) == 0:
         print("yes")
     else:
-        print('no')
+        print("no")

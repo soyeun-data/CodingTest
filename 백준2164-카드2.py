@@ -1,12 +1,14 @@
+# 1,2,3,4....N
+
 from collections import deque
 
 n = int(input())
-cards = deque([num for num in range(1,n+1)])
+queue = deque([num for num in range(1,n+1)])
 
-while len(cards) > 1:
-    cards.popleft()
-    if len(cards) == 1:
+while len(queue) > 1:
+    queue.popleft()
+    if len(queue) == 1:
         break
-    cards.append(cards.popleft())
+    queue.append(queue.popleft())
 
-print(cards[0])
+print(queue[0])
