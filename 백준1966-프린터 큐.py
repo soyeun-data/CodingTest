@@ -1,30 +1,26 @@
-from collections import deque, defaultdict
+# 각 문서의 중요도와 순서를 하나로 묶기
+from collections import deque
 
-case = int(input())
+n = int(input())
 
-for _ in range(case):
-    n, m = map(int, input().split())
-    doc_list = map(int, input().split())
-    importance_dict = defaultdict(int)
-    doc_queue = deque()
-    cnt = 0
+for _ in range(n):
+    num_len, index = map(int, input().split())
+    priority_list = list(map(int, input().split()))
+    priority = sorted(priority_list)
+    doc_list = deque()
+    cnt = 1
+    for i,j in enumerate(priority_list):
+        doc_list.append([i,j])
 
-    for index, importance in enumerate(doc_list):
-        doc_queue.append([index, importance])
-        importance_dict[importance] += 1
+    while len(doc_list) > 0:
+        ind, num = doc_list.popleft()
 
-    while doc_queue:
-        temp_index, temp_importance = doc_queue.popleft()
-        
-        if temp_importance == max(importance_dict):
-            cnt += 1
-            if (importance_dict[temp_importance] - 1) == 0:
-                del importance_dict[temp_importance]
-            else:
-                importance_dict[temp_importance] -= 1
-
-            if temp_index == m:
+        if num == priority[-1]:
+            if ind == index:
                 print(cnt)
                 break
+            else:
+                priority.pop()
+                cnt += 1
         else:
-            doc_queue.append([temp_index, temp_importance])
+            doc_list.append([ind,num])
